@@ -1,0 +1,78 @@
+#! /usr/bin/vvp
+:ivl_version "10.2 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x560f880c6320 .scope module, "tb_comparador" "tb_comparador" 2 4;
+ .timescale -9 -12;
+v0x560f880ed2e0_0 .var "a", 0 0;
+v0x560f880ed3a0_0 .var "b", 0 0;
+v0x560f880ed440_0 .net "eq", 0 0, L_0x560f880ed840;  1 drivers
+v0x560f880ed540_0 .net "gt", 0 0, L_0x560f880ed9c0;  1 drivers
+v0x560f880ed610_0 .net "lt", 0 0, L_0x560f880edb70;  1 drivers
+S_0x560f880c64a0 .scope module, "dut" "comparador" 2 14, 3 1 0, S_0x560f880c6320;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a"
+    .port_info 1 /INPUT 1 "b"
+    .port_info 2 /OUTPUT 1 "gt"
+    .port_info 3 /OUTPUT 1 "lt"
+    .port_info 4 /OUTPUT 1 "eq"
+L_0x560f880ed700 .functor XOR 1, v0x560f880ed2e0_0, v0x560f880ed3a0_0, C4<0>, C4<0>;
+L_0x560f880ed840 .functor NOT 1, L_0x560f880ed700, C4<0>, C4<0>, C4<0>;
+L_0x560f880ed950 .functor NOT 1, v0x560f880ed3a0_0, C4<0>, C4<0>, C4<0>;
+L_0x560f880ed9c0 .functor AND 1, v0x560f880ed2e0_0, L_0x560f880ed950, C4<1>, C4<1>;
+L_0x560f880edb00 .functor NOT 1, v0x560f880ed2e0_0, C4<0>, C4<0>, C4<0>;
+L_0x560f880edb70 .functor AND 1, L_0x560f880edb00, v0x560f880ed3a0_0, C4<1>, C4<1>;
+v0x560f880900d0_0 .net *"_s0", 0 0, L_0x560f880ed700;  1 drivers
+v0x560f880ecc90_0 .net *"_s4", 0 0, L_0x560f880ed950;  1 drivers
+v0x560f880ecd70_0 .net *"_s8", 0 0, L_0x560f880edb00;  1 drivers
+v0x560f880ece30_0 .net "a", 0 0, v0x560f880ed2e0_0;  1 drivers
+v0x560f880ecef0_0 .net "b", 0 0, v0x560f880ed3a0_0;  1 drivers
+v0x560f880ed000_0 .net "eq", 0 0, L_0x560f880ed840;  alias, 1 drivers
+v0x560f880ed0c0_0 .net "gt", 0 0, L_0x560f880ed9c0;  alias, 1 drivers
+v0x560f880ed180_0 .net "lt", 0 0, L_0x560f880edb70;  alias, 1 drivers
+    .scope S_0x560f880c6320;
+T_0 ;
+    %vpi_call 2 24 "$dumpfile", "comparador.vcd" {0 0 0};
+    %vpi_call 2 25 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x560f880c6320 {0 0 0};
+    %end;
+    .thread T_0;
+    .scope S_0x560f880c6320;
+T_1 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x560f880ed2e0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x560f880ed3a0_0, 0, 1;
+    %delay 100000, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x560f880ed2e0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x560f880ed3a0_0, 0, 1;
+    %delay 100000, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x560f880ed2e0_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x560f880ed3a0_0, 0, 1;
+    %delay 100000, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x560f880ed2e0_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x560f880ed3a0_0, 0, 1;
+    %delay 100000, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x560f880ed2e0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x560f880ed3a0_0, 0, 1;
+    %delay 100000, 0;
+    %vpi_call 2 40 "$finish" {0 0 0};
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "comparador_tb.v";
+    "./comparador.v";

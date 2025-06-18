@@ -1,0 +1,5 @@
+set_io a 31
+set_io b 32
+set_io eq 1
+set_io gt 2
+set_io lt 3
