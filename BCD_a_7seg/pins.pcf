@@ -1,0 +1,43 @@
+#############################################
+####### PONCHO 1 BOARD CONSTRAINTS FILE #####
+#############################################
+
+########## Uncomment to use ##########
+
+## ==== Pushbuttons (BTN) ====
+# set_io -pullup yes "name of net" 15 # BTN1
+# set_io -pullup yes "name of net" 16 # BTN2
+# set_io -pullup yes "name of net" 21 # BTN3
+# set_io -pullup yes "name of net" 22 # BTN4
+# set_io -pullup yes "name of net" 37 # BTN5
+## ==========================
+
+## ========================================== ##
+## 4-digit time-multiplexed 7-segment LED display ##
+## ========================================== ##
+
+## ======= Digit enable =======
+set_io digit_enable[0] 79 # Enable 0
+set_io digit_enable[1] 81 # Enable 1
+set_io digit_enable[2] 83 # Enable 2
+set_io digit_enable[3] 85 # Enable 3
+
+## ==== Character LCD (LCD) ====
+set_io sseg_out[6] 124 # A segment
+set_io sseg_out[5] 130 # B segment
+set_io sseg_out[4] 137 # C segment
+set_io sseg_out[3] 143 # D segment
+set_io sseg_out[2] 144 # E segment
+set_io sseg_out[1] 128 # F segment
+set_io sseg_out[0] 135 # G segment
+# set_io "name of net" 139 # Decimal Point
+## ==========================
+
+## ===== Switches (SW) =====
+set_io bcd_in[3] 106 # SW1
+set_io bcd_in[2] 104 # SW2
+set_io bcd_in[1] 98  # SW3
+set_io bcd_in[0] 96  # SW4
+## ========================
+
+
