@@ -19,7 +19,6 @@ module bcd7seg (
             4'b0111: sseg_out = 7'b1110000;
             4'b1000: sseg_out = 7'b1111111;
             4'b1001: sseg_out = 7'b1111011;
-            // completar a b c d e f
             4'b1010: sseg_out = 7'b1110111; // A
             4'b1011: sseg_out = 7'b0011111; // B
             4'b1100: sseg_out = 7'b1001110; // C

@@ -1,8 +1,3 @@
-// blink_tb.v
-// Testbench para el módulo blink_led
-// Este testbench simula un reloj de 50 MHz y verifica el parpadeo del LED
-// SPDX-License-Identifier: GPL-3.0
-
 `include "blink.v"
 `timescale 1ns / 1ps
 
