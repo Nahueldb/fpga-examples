@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1752327347" />
+    <testcase name="comparador_tb" classname="comparador_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/comparador_1bit/comparador_tb.py" lineno="6" time="0.0018506050109863281" sim_time_ns="4.001" ratio_time="2161.9956588508117" />
+  </testsuite>
+</testsuites>
