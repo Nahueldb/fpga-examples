@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1752528250" />
+    <testcase name="bcd7seg_tb" classname="bcd7seg_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/BCD_a_7seg/bcd7seg_tb.py" lineno="7" time="0.002489805221557617" sim_time_ns="160.001" ratio_time="64262.45660289189" />
+  </testsuite>
+</testsuites>

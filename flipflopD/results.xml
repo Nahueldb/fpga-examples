@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1752333426" />
+    <testcase name="flipflopD_tb" classname="flipflopD_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/flipflopD/flipflopD_tb.py" lineno="6" time="0.0025200843811035156" sim_time_ns="70.001" ratio_time="27777.24449422895" />
+  </testsuite>
+</testsuites>
