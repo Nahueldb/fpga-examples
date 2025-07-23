@@ -10,7 +10,7 @@ module contador_universal #(
     input wire out_enable_in,        // Habilita la salida
     input wire counter_enable_in,    // Habilita el conteo
     input wire count_up_in,          // 1 = up, 0 = down
-    input wire clk_edge_in,
+    // input wire clk_edge_in,
     output wire [N-1:0] q_out,        // Salida del contador
     output reg terminal_count_out     // Indica fin de cuenta
 );
@@ -18,6 +18,9 @@ module contador_universal #(
     reg  [N-1:0] r_load = {N{1'b1}};
     wire [N-1:0] r_next;
 
+    parameter COUNT_MAX = 10_000_000;
+
+    reg [24:0] counter = 0;
 
     always @ (posedge clk, posedge rst) 
         begin
@@ -28,7 +31,8 @@ module contador_universal #(
                 r_reg <= d_in;
                 r_load <= d_in;
                 terminal_count_out <= 1'b0; // Resetear la señal de terminal count
-            end else if (counter_enable_in) begin
+            end else if (counter_enable_in && counter == COUNT_MAX - 1) begin
+                    counter <= 0;
                     r_reg <= r_next;
                     if (r_reg == {N{1'b0}} && !count_up_in) begin
                         terminal_count_out <= 1'b1;
@@ -38,6 +42,9 @@ module contador_universal #(
                         r_reg <= {N{1'b0}};
                     end
                 end
+            else begin
+                counter <= counter + 1;
+            end
         end
 
     assign r_next = count_up_in ? (r_reg + 1) : (r_reg - 1);

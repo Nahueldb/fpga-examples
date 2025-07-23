@@ -1,0 +1,253 @@
+$date
+	Wed Jul 23 21:29:38 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb_contador_display $end
+$var wire 4 ! digit_enable [3:0] $end
+$var wire 1 " terminal_count_out $end
+$var wire 7 # sseg_out [6:0] $end
+$var reg 1 $ clk $end
+$var reg 1 % clk_edge_in $end
+$var reg 1 & count_up_in $end
+$var reg 1 ' counter_enable_in $end
+$var reg 4 ( d_in [3:0] $end
+$var reg 1 ) load_in $end
+$var reg 1 * out_enable_in $end
+$var reg 1 + rst $end
+$scope module dut $end
+$var wire 1 $ clk $end
+$var wire 1 % clk_edge_in $end
+$var wire 1 & count_up_in $end
+$var wire 1 ' counter_enable_in $end
+$var wire 4 , d_in [3:0] $end
+$var wire 4 - digit_enable [3:0] $end
+$var wire 1 ) load_in $end
+$var wire 1 * out_enable_in $end
+$var wire 1 + rst $end
+$var wire 1 " terminal_count_out $end
+$var wire 7 . sseg_out [6:0] $end
+$var wire 4 / contador_out [3:0] $end
+$scope module contador_inst $end
+$var wire 1 $ clk $end
+$var wire 1 % clk_edge_in $end
+$var wire 1 & count_up_in $end
+$var wire 1 ' counter_enable_in $end
+$var wire 4 0 d_in [3:0] $end
+$var wire 1 ) load_in $end
+$var wire 1 * out_enable_in $end
+$var wire 1 + rst $end
+$var wire 4 1 r_next [3:0] $end
+$var wire 4 2 q_out [3:0] $end
+$var reg 4 3 r_load [3:0] $end
+$var reg 4 4 r_reg [3:0] $end
+$var reg 1 " terminal_count_out $end
+$upscope $end
+$scope module display_inst $end
+$var wire 4 5 bcd_in [3:0] $end
+$var wire 4 6 digit_enable [3:0] $end
+$var reg 7 7 sseg_out [6:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b1 7
+b111 6
+b0 5
+b0 4
+b1111 3
+b0 2
+b1 1
+b0 0
+b0 /
+b1 .
+b111 -
+b0 ,
+x+
+1*
+0)
+b0 (
+1'
+1&
+x%
+0$
+b1 #
+x"
+b111 !
+$end
+#10000
+b1001111 #
+b1001111 .
+b1001111 7
+b10 1
+b1 /
+b1 2
+b1 5
+b1 4
+1$
+#20000
+0$
+#30000
+b10010 #
+b10010 .
+b10010 7
+b11 1
+b10 /
+b10 2
+b10 5
+b10 4
+1$
+#40000
+0$
+#50000
+b110 #
+b110 .
+b110 7
+b100 1
+b11 /
+b11 2
+b11 5
+b11 4
+1$
+#60000
+b1 #
+b1 .
+b1 7
+b1 1
+b0 /
+b0 2
+b0 5
+0"
+b0 4
+0$
+1+
+#70000
+1$
+#75000
+0+
+#80000
+0$
+#90000
+b1001111 #
+b1001111 .
+b1001111 7
+b10 1
+b1 /
+b1 2
+b1 5
+b1 4
+1$
+#95000
+b1010 (
+b1010 ,
+b1010 0
+1)
+#100000
+0$
+#110000
+b1000 #
+b1000 .
+b1000 7
+b1011 1
+b1010 /
+b1010 2
+b1010 5
+b1010 3
+b1010 4
+1$
+#115000
+0)
+#120000
+0$
+#130000
+b1100000 #
+b1100000 .
+b1100000 7
+b1100 1
+b1011 /
+b1011 2
+b1011 5
+b1011 4
+1$
+#140000
+0$
+#150000
+b110001 #
+b110001 .
+b110001 7
+b1101 1
+b1100 /
+b1100 2
+b1100 5
+b1100 4
+1$
+#160000
+0$
+#170000
+b1000010 #
+b1000010 .
+b1000010 7
+b1110 1
+b1101 /
+b1101 2
+b1101 5
+b1101 4
+1$
+#180000
+0$
+#190000
+b110000 #
+b110000 .
+b110000 7
+b1111 1
+b1110 /
+b1110 2
+b1110 5
+b1110 4
+1$
+#195000
+b1101 1
+0&
+#200000
+0$
+#210000
+b1000010 #
+b1000010 .
+b1000010 7
+b1100 1
+b1101 /
+b1101 2
+b1101 5
+b1101 4
+1$
+#220000
+0$
+#230000
+b110001 #
+b110001 .
+b110001 7
+b1011 1
+b1100 /
+b1100 2
+b1100 5
+b1100 4
+1$
+#240000
+0$
+#250000
+b1100000 #
+b1100000 .
+b1100000 7
+b1010 1
+b1011 /
+b1011 2
+b1011 5
+b1011 4
+1$
+#255000
