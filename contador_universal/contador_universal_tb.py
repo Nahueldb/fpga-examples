@@ -1,5 +1,5 @@
 import cocotb
-from cocotb.clock import Clock
+from cocotb.clock import Clock, Timer
 from cocotb.triggers import RisingEdge, ReadOnly
 
 
@@ -25,86 +25,74 @@ async def test_increment(dut):
 
     for expected in range(1, 16):
         await RisingEdge(dut.clk)
-        assert dut.q_out.value.integer == expected, f"Increment failed at {expected}, expected {expected} but got {dut.q_out.value.integer}"
-
-
-# @cocotb.test()
-# async def test_reset(dut):
-#     await setup(dut)
-#     dut.counter_enable_in.value = 1
-#     await RisingEdge(dut.clk)
-
-#     # Reset
-#     dut.rst.value = 1
-#     await RisingEdge(dut.clk)
-#     assert dut.q_out.value.integer == 0, "Reset failed: q_out != 0"
-#     dut.rst.value = 0
-
-
-# @cocotb.test()
-# async def test_decrement(dut):
-#     await setup(dut, count_up_in=0)
-#     await RisingEdge(dut.clk)
-
-#     for expected in range(15, -1, -1):
-#         assert dut.q_out.value.integer == expected, f"Decrement failed at {expected}, expected {expected} but got {dut.q_out.value.integer}"
-#         await RisingEdge(dut.clk)
-
-
-# @cocotb.test()
-# async def test_load_value(dut):
-#     await setup(dut)
-#     dut.load_in.value = 1
-#     dut.d_in.value = PRESET_VALUE 
-#     await RisingEdge(dut.clk)
-#     dut.load_in.value = 0
-#     await RisingEdge(dut.clk)
-#     assert dut.q_out.value.integer == 5, f"Load failed: expected 5 but got {dut.q_out.value.integer}"
-
-
-# @cocotb.test()
-# async def test_terminal_count_up(dut):
-#     await setup(dut, count_up_in=1)
-
-#     for _ in range(15):
-#         await RisingEdge(dut.clk)
-
-#     assert dut.terminal_count_out.value == 1, "Terminal count not reached when expected"
-#     assert dut.q_out.value.integer == PRESET_VALUE, "Counter did not reset to PRESET_VALUE after terminal count"
-#     # Reset terminal count
-#     dut.rst.value = 1
-#     await RisingEdge(dut.clk)
-
-#     assert dut.terminal_count_out.value == 0, "Terminal count not reset correctly"
-
-
-# @cocotb.test()
-# async def test_terminal_count_down(dut):
-#     await setup(dut, count_up_in=0)
-
-#     for _ in range(PRESET_VALUE, -1, -1):
-#         await RisingEdge(dut.clk)
-
-#     assert dut.terminal_count_out.value == 1, "Terminal count not reached when expected"
-#     assert dut.q_out.value.integer == 0, "Counter did not reset to 0 after terminal count"
-    
-#     # Reset terminal count
-#     dut.rst.value = 1
-#     await RisingEdge(dut.clk)
-
-#     assert dut.terminal_count_out.value == 0, "Terminal count not reset correctly"
+        assert dut.sseg_out.value == get_7seg_encoding(expected), f"Increment failed at {expected}, expected {get_7seg_encoding(expected)} but got {dut.sseg_out.value.integer}"
 
 
 @cocotb.test()
-async def test_7seg_display(dut):
+async def test_reset(dut):
     await setup(dut)
+    dut.counter_enable_in.value = 1
+    await RisingEdge(dut.clk)
 
-    for i in range(0, 16):
+    # Reset
+    dut.rst.value = 1
+    await RisingEdge(dut.clk)
+    assert dut.sseg_out.value.integer == get_7seg_encoding(0), "Reset failed: sseg_out != 0"
+    dut.rst.value = 0
+
+
+@cocotb.test()
+async def test_decrement(dut):
+    await setup(dut, count_up_in=0)
+    await RisingEdge(dut.clk)
+
+    for expected in range(15, -1, -1):
+        assert dut.sseg_out.value.integer == get_7seg_encoding(expected), f"Decrement failed at {expected}, expected {expected} but got {dut.sseg_out.value.integer}"
         await RisingEdge(dut.clk)
-        await ReadOnly()
-        print(dut.sseg_out.value)
-        print(i)
-        assert dut.sseg_out.value == get_7seg_encoding(i), f"7-segment display failed at {i}, expected {get_7seg_encoding(i)} but got {dut.sseg_out.value}"
+
+
+@cocotb.test()
+async def test_load_value(dut):
+    await setup(dut)
+    dut.load_in.value = 1
+    dut.d_in.value = PRESET_VALUE 
+    await RisingEdge(dut.clk)
+    dut.load_in.value = 0
+    await RisingEdge(dut.clk)
+    assert dut.sseg_out.value.integer == get_7seg_encoding(5), f"Load failed: expected 5 but got {dut.sseg_out.value.integer}"
+
+
+@cocotb.test()
+async def test_terminal_count_up(dut):
+    await setup(dut, count_up_in=1)
+
+    for _ in range(15):
+        await RisingEdge(dut.clk)
+
+    assert dut.terminal_count_out.value == 1, "Terminal count not reached when expected"
+    assert dut.sseg_out.value.integer == get_7seg_encoding(PRESET_VALUE), "Counter did not reset to PRESET_VALUE after terminal count"
+    # Reset terminal count
+    dut.rst.value = 1
+    await RisingEdge(dut.clk)
+
+    assert dut.terminal_count_out.value == 0, "Terminal count not reset correctly"
+
+
+@cocotb.test()
+async def test_terminal_count_down(dut):
+    await setup(dut, count_up_in=0)
+
+    for _ in range(PRESET_VALUE, -1, -1):
+        await RisingEdge(dut.clk)
+
+    assert dut.terminal_count_out.value == 1, "Terminal count not reached when expected"
+    assert dut.sseg_out.value.integer == get_7seg_encoding(0), "Counter did not reset to 0 after terminal count"
+
+    # Reset terminal count
+    dut.rst.value = 1
+    await RisingEdge(dut.clk)
+
+    assert dut.terminal_count_out.value == 0, "Terminal count not reset correctly"
 
 
 def get_7seg_encoding(value, common_anode=COMMON_ANODE):

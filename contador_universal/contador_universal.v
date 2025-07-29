@@ -18,7 +18,8 @@ module contador_universal #(
     reg  [N-1:0] r_load = {N{1'b1}};
     wire [N-1:0] r_next;
 
-    parameter COUNT_MAX = 10_000_000;
+    parameter COUNT_MAX = 10_000_000; // Retardo del contador para poder visualizarlo en la sintesis
+                                      //En caso de ser 1 este retardo no tendra efecto y la cuenta se hara en cada flanco del clock
 
     reg [24:0] counter = 0;
 
