@@ -1,0 +1,11 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1753829673" />
+    <testcase name="test_increment" classname="contador_universal_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/contador_universal/contador_universal_tb.py" lineno="22" time="0.0024950504302978516" sim_time_ns="150.001" ratio_time="60119.426116005736" />
+    <testcase name="test_reset" classname="contador_universal_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/contador_universal/contador_universal_tb.py" lineno="31" time="0.000507354736328125" sim_time_ns="30.001000000000005" ratio_time="59132.19657142858" />
+    <testcase name="test_decrement" classname="contador_universal_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/contador_universal/contador_universal_tb.py" lineno="44" time="0.001821756362915039" sim_time_ns="180.00099999999998" ratio_time="98806.29685957334" />
+    <testcase name="test_load_value" classname="contador_universal_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/contador_universal/contador_universal_tb.py" lineno="54" time="0.0005688667297363281" sim_time_ns="30.001000000000033" ratio_time="52738.18705113166" />
+    <testcase name="test_terminal_count_up" classname="contador_universal_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/contador_universal/contador_universal_tb.py" lineno="65" time="0.0016019344329833984" sim_time_ns="170.00099999999998" ratio_time="106122.3209263283" />
+    <testcase name="test_terminal_count_down" classname="contador_universal_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/contador_universal/contador_universal_tb.py" lineno="81" time="0.0008702278137207031" sim_time_ns="80.00099999999998" ratio_time="91931.09980931504" />
+  </testsuite>
+</testsuites>
