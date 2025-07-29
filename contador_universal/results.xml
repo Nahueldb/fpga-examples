@@ -1,11 +1,11 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1753224954" />
-    <testcase name="test_increment" classname="contador_universal_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/contador_universal/contador_universal_tb.py" lineno="21" time="0.00379180908203125" sim_time_ns="150.001" ratio_time="39559.21744869216" />
-    <testcase name="test_reset" classname="contador_universal_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/contador_universal/contador_universal_tb.py" lineno="30" time="0.0007917881011962891" sim_time_ns="30.001000000000005" ratio_time="37890.187986750985" />
-    <testcase name="test_decrement" classname="contador_universal_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/contador_universal/contador_universal_tb.py" lineno="43" time="0.002815723419189453" sim_time_ns="180.00099999999998" ratio_time="63927.088425402195" />
-    <testcase name="test_load_value" classname="contador_universal_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/contador_universal/contador_universal_tb.py" lineno="53" time="0.0009808540344238281" sim_time_ns="30.001000000000033" ratio_time="30586.610185707374" />
-    <testcase name="test_terminal_count_up" classname="contador_universal_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/contador_universal/contador_universal_tb.py" lineno="64" time="0.002767324447631836" sim_time_ns="170.00099999999998" ratio_time="61431.53909744119" />
-    <testcase name="test_terminal_count_down" classname="contador_universal_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/contador_universal/contador_universal_tb.py" lineno="80" time="0.0014567375183105469" sim_time_ns="80.00099999999998" ratio_time="54917.92378134205" />
+    <property name="random_seed" value="1753464642" />
+    <testcase name="test_increment" classname="contador_universal_tb" file="/storage/nahueldb_storage/Programacion/fpga-examples/contador_universal/contador_universal_tb.py" lineno="22" time="0.0013451576232910156" sim_time_ns="10.001" ratio_time="7434.816431052818">
+      <failure message="Test failed with RANDOM_SEED=1753464642" />
+    </testcase>
+    <testcase name="test_7seg_display" classname="contador_universal_tb" file="/storage/nahueldb_storage/Programacion/fpga-examples/contador_universal/contador_universal_tb.py" lineno="98" time="0.0008184909820556641" sim_time_ns="30.001000000000005" ratio_time="36654.038538887275">
+      <failure message="Test failed with RANDOM_SEED=1753464642" />
+    </testcase>
   </testsuite>
 </testsuites>
