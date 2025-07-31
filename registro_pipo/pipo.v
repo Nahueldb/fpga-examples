@@ -3,7 +3,7 @@ module pipo #(
     parameter CLOCK_EDGE = 1 // 1 para flanco ascendente, 0 para descendente
 )(
     input wire [DATA_WIDTH-1:0] d_in,
-    output reg [DATA_WIDTH-1:0] q_out,
+    output wire [DATA_WIDTH-1:0] q_out,
     input wire out_enable_in,
     input wire rst,
     input wire clk,
