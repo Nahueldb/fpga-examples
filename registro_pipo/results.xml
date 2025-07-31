@@ -1,0 +1,8 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1754000242" />
+    <testcase name="test_pipo_functionality" classname="pipo_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/registro_pipo/pipo_tb.py" lineno="8" time="0.0025899410247802734" sim_time_ns="80.001" ratio_time="30889.120344656174" />
+    <testcase name="test_reset" classname="pipo_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/registro_pipo/pipo_tb.py" lineno="28" time="0.0003864765167236328" sim_time_ns="10.00099999999999" ratio_time="25877.38081677974" />
+    <testcase name="test_output_enable" classname="pipo_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/registro_pipo/pipo_tb.py" lineno="59" time="0.0002753734588623047" sim_time_ns="10.001000000000005" ratio_time="36317.951778354996" />
+  </testsuite>
+</testsuites>
