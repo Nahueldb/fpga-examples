@@ -1,53 +1,51 @@
-`include "pipo.v"
+`include "siso.v"
 `timescale 1ns / 1ps
 
 
-module pipo_tb;
+module siso_tb;
     // Declaración de señales
-    reg [7:0] d_in;
-    wire [7:0] q_out;
+    reg d_in;
+    wire q_out;
     reg out_enable_in;
     reg rst;
     reg clk = 0;
-    reg clk_enable;
 
-    pipo #(
-        .DATA_WIDTH(8),
+    reg [3:0] d_reg = 4'b1001; // Registro interno para verificar el estado
+    integer i;
+
+    siso #(
+        .DATA_WIDTH(4),
         .CLOCK_EDGE(1)
     ) dut (
         .d_in(d_in),
         .q_out(q_out),
         .out_enable_in(out_enable_in),
         .rst(rst),
-        .clk(clk),
-        .clk_enable(clk_enable)
+        .clk(clk)
     );
 
     always #10 clk = ~clk;
 
     initial begin
-        $dumpfile("pipo.vcd");
-        $dumpvars(0, pipo_tb);
+        $dumpfile("siso.vcd");
+        $dumpvars(0, siso_tb);
     end
 
     initial begin
-        clk_enable = 1;
         out_enable_in = 1;
         rst = 0;
 
-        #20 d_in = 8'b10101010;
-
-        #20 clk_enable = 0;
-        d_in = 8'b00000000;
-
-        #80 clk_enable = 1;
-        d_in = 8'b11110000;
-
-        #20 clk_enable = 0;
-
-        #20 rst = 1;
-
-        #40 out_enable_in = 0;
+        #20 
+        for (i = 0; i < 4; i = i + 1) begin
+            d_in = d_reg[i];
+            #20; // Espera para permitir que el registro se actualice
+        end
+        d_in = 0; // Enviar un valor de 0 al final
+        #80
+        rst = 1; // Activar el reset
+        #20;
+        rst = 0; // Desactivar el reset
+        out_enable_in = 0; // Desactivar la salida
 
         #40 $finish;
     end
