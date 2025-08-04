@@ -1,0 +1,113 @@
+$date
+	Sat Aug  2 14:47:45 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module siso_tb $end
+$var wire 1 ! q_out $end
+$var reg 1 " clk $end
+$var reg 1 # d_in $end
+$var reg 4 $ d_reg [3:0] $end
+$var reg 1 % out_enable_in $end
+$var reg 1 & rst $end
+$var integer 32 ' i [31:0] $end
+$scope module dut $end
+$var wire 1 " clk $end
+$var wire 1 # d_in $end
+$var wire 1 % out_enable_in $end
+$var wire 1 & rst $end
+$var wire 1 ! q_out $end
+$var reg 4 ( d_reg [3:0] $end
+$scope begin posedge_clk $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx (
+bx '
+0&
+1%
+b1001 $
+x#
+0"
+x!
+$end
+#10000
+1"
+#20000
+0"
+1#
+b0 '
+#30000
+bx1 (
+1"
+#40000
+0"
+0#
+b1 '
+#50000
+bx10 (
+1"
+#60000
+0"
+b10 '
+#70000
+bx100 (
+1"
+#80000
+0"
+1#
+b11 '
+#90000
+1!
+b1001 (
+1"
+#100000
+0"
+0#
+b100 '
+#110000
+0!
+b10 (
+1"
+#120000
+0"
+#130000
+b100 (
+1"
+#140000
+0"
+#150000
+1!
+b1000 (
+1"
+#160000
+0"
+#170000
+0!
+b0 (
+1"
+#180000
+0"
+1&
+#190000
+1"
+#200000
+z!
+0"
+0%
+0&
+#210000
+1"
+#220000
+0"
+#230000
+1"
+#240000
+0"

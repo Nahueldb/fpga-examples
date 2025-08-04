@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1754082588" />
+    <testcase name="siso_tb" classname="siso_tb" file="/storage/nahueldb_storage/Programacion/fpga-examples/registro_siso/siso_tb.py" lineno="7" time="0.003006458282470703" sim_time_ns="100.001" ratio_time="33262.06140396511" />
+  </testsuite>
+</testsuites>
