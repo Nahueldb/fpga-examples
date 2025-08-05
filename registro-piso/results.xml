@@ -1,0 +1,8 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1754421922" />
+    <testcase name="piso_tb_functionality" classname="piso_tb" file="/storage/nahueldb_storage/Programacion/fpga-examples/registro-piso/piso_tb.py" lineno="8" time="0.002919912338256836" sim_time_ns="70.001" ratio_time="23973.664922348333" />
+    <testcase name="piso_tb_reset" classname="piso_tb" file="/storage/nahueldb_storage/Programacion/fpga-examples/registro-piso/piso_tb.py" lineno="31" time="0.0004911422729492188" sim_time_ns="10.00099999999999" ratio_time="20362.735099029105" />
+    <testcase name="piso_tb_output_enable" classname="piso_tb" file="/storage/nahueldb_storage/Programacion/fpga-examples/registro-piso/piso_tb.py" lineno="44" time="0.0003662109375" sim_time_ns="10.001000000000005" ratio_time="27309.397333333345" />
+  </testsuite>
+</testsuites>
