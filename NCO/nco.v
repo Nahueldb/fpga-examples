@@ -1,6 +1,6 @@
 module nco #(
-    parameter NCO_BITS = 10,
-    parameter NCO_FREQ_BITS = 9 // Number of bits for frequency control word
+    parameter NCO_BITS = 4,
+    parameter NCO_FREQ_BITS = 4 // Number of bits for frequency control word
 )(
     input wire rst_in,
     input wire clk_in,
