@@ -29,13 +29,12 @@ La compuerta AND de 2 entradas es un circuito lógico que produce una salida alt
 
 ```verilog
 module and_2 (
-    input wire a,
-    input wire b,
-    output wire q
+    input wire a_in,
+    input wire b_in,
+    output wire q_out
 );
-    // Compuerta AND de 2 entradas
-    // La salida q es alta solo si ambas entradas a y b son altas
-    assign q = a && b;
+
+    assign q_out = a_in && b_in;
 
 endmodule
 ```
@@ -51,15 +50,15 @@ endmodule
 module tb_and;
 
     // Declaración de señales
-    reg a;
-    reg b;
-    wire q;
+    reg a_in;
+    reg b_in;
+    wire q_out;
 
     // Instanciamos el DUT (Device Under Test)
     and_2 dut (
-        .a(a),
-        .b(b),
-        .q(q)
+        .a_in(a_in),
+        .b_in(b_in),
+        .q_out(q_out)
     );
 
     // Dump de señales para GTKWave
@@ -71,13 +70,13 @@ module tb_and;
     // Generación de señales de prueba
     initial begin
         // Inicializamos las señales
-        a = 0; b = 0;
+        a_in = 0; b_in = 0;
 
         // Cambios en las señales para probar el circuito
-        #100 a = 1; b = 0; // Caso 1
-        #100 a = 0; b = 1; // Caso 2
-        #100 a = 1; b = 1; // Caso 3
-        #100 a = 0; b = 0; // Caso 4
+        #100 a_in = 1; b_in = 0; // Caso 1
+        #100 a_in = 0; b_in = 1; // Caso 2
+        #100 a_in = 1; b_in = 1; // Caso 3
+        #100 a_in = 0; b_in = 0; // Caso 4
 
         // Finalizamos la simulación
         #100 $finish;
@@ -95,27 +94,27 @@ from cocotb.triggers import Timer
 @cocotb.test()
 async def and_tb(dut):
     """Testbench for the AND gate."""
-    # Test case 1: A = 0, B = 0, Expected output = 0
-    dut.a.value = 0
-    dut.b.value = 0
+    # A = 0, B = 0, Output = 0
+    dut.a_in.value = 0
+    dut.b_in.value = 0
     await Timer(1, units='ns')
-    assert dut.q.value == 0
+    assert dut.q_out.value == 0
 
-    # Test case 2: A = 0, B = 1, Expected output = 0
-    dut.a.value = 0
-    dut.b.value = 1
+    # A = 0, B = 1, Output = 0
+    dut.a_in.value = 0
+    dut.b_in.value = 1
     await Timer(1, units='ns')
-    assert dut.q.value == 0
+    assert dut.q_out.value == 0
 
-    # Test case 3: A = 1, B = 0, Expected output = 0
-    dut.a.value = 1
-    dut.b.value = 0
+    # A = 1, B = 0, Output = 0
+    dut.a_in.value = 1
+    dut.b_in.value = 0
     await Timer(1, units='ns')
-    assert dut.q.value == 0
+    assert dut.q_out.value == 0
 
-    # Test case 4: A = 1, B = 1, Expected output = 1
-    dut.a.value = 1
-    dut.b.value = 1
+    # A = 1, B = 1, Output = 1
+    dut.a_in.value = 1
+    dut.b_in.value = 1
     await Timer(1, units='ns')
-    assert dut.q.value == 1
+    assert dut.q_out.value == 1
 ```
