@@ -1,6 +1,0 @@
-<testsuites name="results">
-  <testsuite name="all" package="all">
-    <property name="random_seed" value="1752076924" />
-    <testcase name="and_tb" classname="and_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/and/and_tb.py" lineno="4" time="0.0009717941284179688" sim_time_ns="4.001" ratio_time="4117.127159960746" />
-  </testsuite>
-</testsuites>
