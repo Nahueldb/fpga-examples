@@ -1,14 +1,13 @@
 module comparador (
-    input wire a,
-    input wire b,
-    output wire gt,
-    output wire lt,
-    output wire eq
+    input wire a_in,
+    input wire b_in,
+    output wire gt_out,
+    output wire lt_out,
+    output wire eq_out
 );
 
-    assign eq = ~(a ^ b);  // eq = 1 cuando a y b son iguales
-    assign gt = a && ~b;
-    assign lt = ~a && b;
-
+    assign eq_out = ~(a_in ^ b_in);  // eq = 1 cuando a y b son iguales
+    assign gt_out = a_in && ~b_in;
+    assign lt_out = ~a_in && b_in;
 
 endmodule
