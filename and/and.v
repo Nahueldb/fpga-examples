@@ -1,9 +1,9 @@
 module and_2 (
-    input wire a,
-    input wire b,
-    output wire q
+    input wire a_in,
+    input wire b_in,
+    output wire q_out
 );
 
-    assign q = a && b;
+    assign q_out = a_in && b_in;
 
 endmodule
