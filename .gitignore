@@ -1,2 +1,10 @@
 venv/
 *.log
+top.*
+*.dvi
+*.aux
+*.log
+*.pdf
+*.toc
+*.out
+*.gz

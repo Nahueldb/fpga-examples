@@ -1,0 +1,95 @@
+\documentclass[a4paper,12pt]{article}
+
+
+\title{Cocotb wiki}
+\author{Nahuel Agustin De Brasi Congiusti}
+\date{\today}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\lstset{
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue},
+	commentstyle=\color{green!50!black},
+	stringstyle=\color{orange},
+}
+
+\begin{document}
+
+
+\maketitle
+
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{2}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Introducción}
+
+\subsection{¿Qué es Cocotb?}
+
+Cocotb es un acrónimo de \textbf{Co}routine based \textbf{Co}simulation \textbf{T}est\textbf{b}ench, y constituye una herramienta de código abierto para la verificación de diseños digitales usando Python. Además de las ventajas que ofrece este lenguaje, Cocotb proporciona un framework que permite escribir el código de manera más eficiente y funciona con cualquier diseño de hardware que se pueda simular, ya sea en Verilog, System Verilog, VHDL, etc.
+
+\subsubsection{¿Cómo funciona?}
+
+Un testbench típico de Cocotb no requiere código RTL adicional. El DUT se instancia como toplevel en el simulador y Cocotb genera los estímulos necesarios y monitorea las salidas directamente desde Python. Es importante notar que no se pueden instanciar bloques HDL, por lo que el DUT debe estar completo.
+
+Un test es simplemente una función en Python. En un momento dado, o bien el simulador avanza en el tiempo, o bien se ejecuta el código. Se utiliza la palabra clave \textbf{await} para indicar cuándo se debe devolver el control de la ejecución al simulador.
+
+
+
+\newpage
+
+\section{Instalación}
+
+Se brindara una guia rapida para la instalacion, en caso de ampliar consultar
+
+\begin{itemize}
+	\item \href{https://docs.cocotb.org/en/stable/install.html#install-prerequisites}{Guia de instalación de Cocotb}
+	\item \href{https://www.python.org/downloads/}{Descargar Python}
+\end{itemize}
+
+\subsection{Prerequisitos}
+
+
+\begin{itemize}
+	\item Python 3.6+
+	\item GNU Make 3+
+	\item Simulador Verilog o VHDL simulator, dependiendo del codigo RTL
+\end{itemize}
+
+En caso de necesitar instalar python y make se puede utilizar el siguiente comando
+
+\begin{lstlisting}[language=bash]
+sudo apt-get install make python3 python3-pip libpython3-dev
+\end{lstlisting}
+
+Algunas opciones de simuladores para instalar
+
+\begin{itemize}
+	
+\item Icarus Verilog (Verilog)
+\begin{lstlisting}[language=bash]
+sudo apt-get install iverilog
+\end{lstlisting}
+
+\item GHDL (VHDL)
+\begin{lstlisting}[language=bash]
+sudo apt-get install ghdl
+\end{lstlisting}
+
+\item Verilator (Verilog)
+\begin{lstlisting}[language=bash]
+sudo apt-get install verilator
+\end{lstlisting}
+\end{itemize}
+
+
+\end{document}
