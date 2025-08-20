@@ -9,6 +9,8 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{hyperref}
+\usepackage{caption}
+\captionsetup[lstlisting]{labelformat=empty, justification=raggedright, singlelinecheck=false, font=bf}
 
 \lstset{
 	basicstyle=\ttfamily\small,
@@ -16,6 +18,14 @@
 	commentstyle=\color{green!50!black},
 	stringstyle=\color{orange},
 }
+
+\lstdefinelanguage{make}{
+	morekeywords={include, ifeq, else, endif},
+	sensitive=false,
+	morecomment=[l]\#,
+	morestring=[b]"
+}
+
 
 \begin{document}
 
@@ -90,6 +100,113 @@ sudo apt-get install ghdl
 sudo apt-get install verilator
 \end{lstlisting}
 \end{itemize}
+
+\subsection{Instalacion de cocotb}
+
+Se recomienda ejecutar en un entorno virtual, para eso primero debemos crearlo. Desde el root del proyecto ejecutamos
+\begin{lstlisting}[language=bash]
+python -m venv venv
+\end{lstlisting}
+
+Luego debemos activar este entorno
+\begin{lstlisting}[language=bash]
+source venv/bin/activate
+\end{lstlisting}
+
+Por ultimo instalamos la librería de cocotb
+\begin{lstlisting}[language=bash]
+pip install cocotb
+\end{lstlisting}
+
+\newpage
+
+\section{Testbench}
+En este apartado buscaremos explicar como usar cocotb, como primer ejemplo haremos el testbench de una compuerta and.
+
+\subsection{Makefile}
+
+El primer paso es la creacion del Makefile. Este archivo simplifica el flujo de verificacion y se ejecuta solo con el comando \textbf{make}
+
+\begin{lstlisting}[language=make, caption=Makefile, frame=lines]
+TOPLEVEL_LANG = verilog # Lenguaje RTL
+VERILOG_SOURCES = $(shell pwd)/and.v # Archivos de codigo RTL
+TOPLEVEL = and_2 # Nombre del modulo toplevel
+MODULE = and_tb # Nombre del archivo Python del testbench
+
+SIM = icarus # Simulador a usar
+
+# Importar reglas de cocotb para simular el DUT con Python
+include $(shell cocotb-config --makefiles)/Makefile.sim
+\end{lstlisting}
+
+
+\subsection{Test}
+
+Luego tenemos que escribir el código de verificación en Python
+
+Primero debemos importar la librería y las clases a utilizar, en este caso solo sera \textbf{Timer} que mas adelante explicaremos su función.
+
+\begin{lstlisting}[language=Python, caption=and\_tb.py, frame=lines]
+import cocotb
+from cocotb.triggers import Timer
+\end{lstlisting}
+
+A continuación escribimos el código del test. La primera línea corresponde al \textbf{decorador}  que utilizaremos; en pocas palabras, es un 'agregado' que se aplica a la función para indicarle al framework que se trata de un test de cocotb.
+
+La segunda línea que observamos es la declaración del test. Para esto utilizamos las palabras reservadas \textbf{async def}, que indican que estamos creando una función asíncrona. Que es un tipo de función que puede pausar su ejecución temporalmente mientras espera que ocurra algún evento o se obtenga un resultado, sin bloquear el resto del programa.
+
+En la declaración del test, vemos que recibe como único argumento \textbf{dut}. Este representa, como mencionamos en la introducción, la instanciación del módulo toplevel que estamos verificando.
+
+\begin{lstlisting}[language=Python, caption=and\_tb.py, frame=lines]
+@cocotb.test() # Decorador
+async def and_tb(dut): # Declaracion del test
+	"""Testbench for the AND gate."""
+	# Aqui escribiremos el estimulo para la compuerta AND
+\end{lstlisting}
+
+Lo siguiente, como bien indica el ultimo comentario del fragmento de código anterior es generar los estímulos para la compuerta \textbf{and}. Las señales del dut se acceden usando la misma notación (\textbf{.}) utilizada para acceder a los atributos de un objeto.
+
+Para asignar un valor a una señal usaremos la propiedad \textbf{value} y en este caso lo asignaremos de forma directa tal como podemos ver en el fragmento de código a continuación.
+
+Una vez asignados los valores deseados, debemos esperar a que los cambios se apliquen. Para ello utilizamos el \textbf{Timer}, configurado en este caso en un nanosegundo. Observamos también la palabra clave \textbf{await}, que indica un funcionamiento asíncrono: el test se pausa durante un nanosegundo, mientras que el simulador continúa ejecutándose internamente, procesando otras señales o incluso otros tests si existieran.
+
+Por último, debemos verificar que la salida tenga el valor esperado. Para ello usamos la palabra clave \textbf{assert}, que como indica su nombre, afirma que la condición siguiente sea verdadera. Si esta no se cumple, se genera un error en el test. En este caso ambas entradas eran \textbf{0} por lo que la salida deberá ser \textbf{0}.
+
+\begin{lstlisting}[language=Python, caption=and\_tb.py, frame=lines]
+	# Test case 1: A = 0, B = 0, Expected output = 0
+	
+	# Asignacion directa
+	dut.a_in.value = 0
+	dut.b_in.value = 0
+	
+	# Espera para que el cambio se aplique
+	await Timer(1, units='ns')
+	
+	# Verificacion de que se cumpla con la salida esperada
+	assert dut.q_out.value == 0
+\end{lstlisting}
+
+Teniendo en cuenta lo explicado en los párrafos anteriores, completamos el test para todas las entradas posibles.
+
+\begin{lstlisting}[language=Python, caption=and\_tb.py, frame=lines]
+	# Test case 2: A = 0, B = 1, Expected output = 0
+	dut.a_in.value = 0
+	dut.b_in.value = 1
+	await Timer(1, units='ns')
+	assert dut.q_out.value == 0
+	
+	# Test case 3: A = 1, B = 0, Expected output = 0
+	dut.a_in.value = 1
+	dut.b_in.value = 0
+	await Timer(1, units='ns')
+	assert dut.q_out.value == 0
+	
+	# Test case 4: A = 1, B = 1, Expected output = 1
+	dut.a_in.value = 1
+	dut.b_in.value = 1
+	await Timer(1, units='ns')
+	assert dut.q_out.value == 1
+\end{lstlisting}
 
 
 \end{document}
