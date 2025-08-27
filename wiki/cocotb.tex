@@ -10,6 +10,8 @@
 \usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage{caption}
+\usepackage{todonotes}
+\newcommand{\todoo}[2][] {\smallskip \todo[inline, size=\small, color=green!40, #1]{#2}}
 \captionsetup[lstlisting]{labelformat=empty, justification=raggedright, singlelinecheck=false, font=bf}
 
 \lstset{
@@ -117,6 +119,8 @@ Por ultimo instalamos la librería de cocotb
 \begin{lstlisting}[language=bash]
 pip install cocotb
 \end{lstlisting}
+
+\todoo{cocotb verification}
 
 \newpage
 
@@ -297,4 +301,5 @@ async def flipflopD_tb(dut):
 \end{lstlisting}
 
 
+\listoftodos
 \end{document}

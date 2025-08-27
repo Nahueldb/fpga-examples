@@ -10,3 +10,4 @@ top.*
 *.gz
 *.fls
 *.fdb_latexmk
+*.tdo
