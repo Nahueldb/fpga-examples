@@ -8,3 +8,5 @@ top.*
 *.toc
 *.out
 *.gz
+*.fls
+*.fdb_latexmk

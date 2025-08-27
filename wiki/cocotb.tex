@@ -32,8 +32,8 @@
 
 \maketitle
 
-\setcounter{tocdepth}{2}
-\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
 
 \newpage
 
@@ -120,12 +120,12 @@ pip install cocotb
 
 \newpage
 
-\section{Testbench}
-En este apartado buscaremos explicar como usar cocotb, como primer ejemplo haremos el testbench de una compuerta and.
+\section{Escritura de tests}
+En este apartado buscaremos explicar como usar cocotb, usaremos ejemplos básicos para facilitar la explicación.
 
 \subsection{Makefile}
 
-El primer paso es la creacion del Makefile. Este archivo simplifica el flujo de verificacion y se ejecuta solo con el comando \textbf{make}
+El primer paso es la creación del Makefile. Este archivo simplifica el flujo de verificación y se ejecuta solo con el comando \textbf{make}
 
 \begin{lstlisting}[language=make, caption=Makefile, frame=lines]
 TOPLEVEL_LANG = verilog # Lenguaje RTL
@@ -140,9 +140,10 @@ include $(shell cocotb-config --makefiles)/Makefile.sim
 \end{lstlisting}
 
 
-\subsection{Test}
+\subsection{Estructura basica del test}
 
-Luego tenemos que escribir el código de verificación en Python
+\subsubsection{Imports}
+
 
 Primero debemos importar la librería y las clases a utilizar, en este caso solo sera \textbf{Timer} que mas adelante explicaremos su función.
 
@@ -150,6 +151,8 @@ Primero debemos importar la librería y las clases a utilizar, en este caso solo
 import cocotb
 from cocotb.triggers import Timer
 \end{lstlisting}
+
+\subsubsection{Definición de la función}
 
 A continuación escribimos el código del test. La primera línea corresponde al \textbf{decorador}  que utilizaremos; en pocas palabras, es un 'agregado' que se aplica a la función para indicarle al framework que se trata de un test de cocotb.
 
@@ -164,21 +167,26 @@ async def and_tb(dut): # Declaracion del test
 	# Aqui escribiremos el estimulo para la compuerta AND
 \end{lstlisting}
 
+\subsubsection{Asignación de valores}
 Lo siguiente, como bien indica el ultimo comentario del fragmento de código anterior es generar los estímulos para la compuerta \textbf{and}. Las señales del dut se acceden usando la misma notación (\textbf{.}) utilizada para acceder a los atributos de un objeto.
 
 Para asignar un valor a una señal usaremos la propiedad \textbf{value} y en este caso lo asignaremos de forma directa tal como podemos ver en el fragmento de código a continuación.
 
-Una vez asignados los valores deseados, debemos esperar a que los cambios se apliquen. Para ello utilizamos el \textbf{Timer}, configurado en este caso en un nanosegundo. Observamos también la palabra clave \textbf{await}, que indica un funcionamiento asíncrono: el test se pausa durante un nanosegundo, mientras que el simulador continúa ejecutándose internamente, procesando otras señales o incluso otros tests si existieran.
+\begin{lstlisting}[language=Python, caption=and\_tb.py, frame=lines]
+# Test case 1: A = 0, B = 0, Expected output = 0
+
+# Asignacion directa
+dut.a_in.value = 0
+dut.b_in.value = 0
+
+\end{lstlisting}
+
+\subsubsection{Assert}
+Una vez asignados los valores deseados, debemos esperar a que los cambios se apliquen. Para ello utilizamos el \textbf{Timer}, configurado en este caso en un nanosegundo. Observamos también la palabra clave \textbf{await}, mas adelante explicaremos esto.
 
 Por último, debemos verificar que la salida tenga el valor esperado. Para ello usamos la palabra clave \textbf{assert}, que como indica su nombre, afirma que la condición siguiente sea verdadera. Si esta no se cumple, se genera un error en el test. En este caso ambas entradas eran \textbf{0} por lo que la salida deberá ser \textbf{0}.
 
 \begin{lstlisting}[language=Python, caption=and\_tb.py, frame=lines]
-	# Test case 1: A = 0, B = 0, Expected output = 0
-	
-	# Asignacion directa
-	dut.a_in.value = 0
-	dut.b_in.value = 0
-	
 	# Espera para que el cambio se aplique
 	await Timer(1, units='ns')
 	
@@ -186,7 +194,7 @@ Por último, debemos verificar que la salida tenga el valor esperado. Para ello 
 	assert dut.q_out.value == 0
 \end{lstlisting}
 
-Teniendo en cuenta lo explicado en los párrafos anteriores, completamos el test para todas las entradas posibles.
+Finalmente para cerrar este ejemplo de la compuerta \textbf{and}, completamos el test para todas las entradas posibles.
 
 \begin{lstlisting}[language=Python, caption=and\_tb.py, frame=lines]
 	# Test case 2: A = 0, B = 1, Expected output = 0
@@ -206,6 +214,86 @@ Teniendo en cuenta lo explicado en los párrafos anteriores, completamos el test
 	dut.b_in.value = 1
 	await Timer(1, units='ns')
 	assert dut.q_out.value == 1
+\end{lstlisting}
+
+\subsubsection{Triggers mas utilizados}
+Los triggers se utilizan para indicar al scheduler de cocotb cuándo debe continuar con la ejecución de una corutina. Como mencionamos anteriormente con el \textbf{Timer}, todo trigger debe usarse junto con la palabra clave \textbf{await}. Esto indica un funcionamiento asíncrono: la corutina se pausa durante el tiempo o condición indicada (por ejemplo, un nanosegundo en el test de la compuerta AND), mientras que el simulador sigue ejecutándose internamente, procesando otras señales o incluso otros tests simultáneamente si existieran.
+
+\paragraph{Trigger de tiempo}
+
+\begin{itemize}
+	\item \texttt{cocotb.triggers.Timer(time=None, units='step', *, round\_mode=None, time\_ps=None)}
+	\\
+	Se dispara cuando el tiempo establecido en \texttt{time} fue transcurrido. Las unidades en \texttt{units} pueden ser 'step', 'fs', 'ps', 'ns', 'us', 'ms', 'sec'
+\end{itemize}
+
+
+\paragraph{Triggers de señales}
+
+\begin{itemize}
+	\item \texttt{cocotb.triggers.Edge(signal)}
+	\\
+	Se dispara en cada flanco de la señal.
+	
+	\item \texttt{cocotb.triggers.RisingEdge(signal)}
+	\\
+	Se dispara en el flanco positivo de la señal.
+	
+	\item \texttt{cocotb.triggers.FallingEdge(signal)}
+	\\
+	Se dispara en el flanco negativo de la señal.
+	\\
+	\item \texttt{cocotb.triggers.ClockCycles(signal, num\_cycles, rising=True)}\\
+	Se dispara luego de un número determinado de ciclos, indicado por \texttt{num\_cycles}.  
+	El flanco se ajusta con el parámetro \texttt{rising} que, por defecto, es \texttt{True} (flanco positivo).
+\end{itemize}
+
+\subsubsection{Clock}
+
+La clase \texttt{cocotb.clock.Clock} permite generar un reloj con ciclo de trabajo 50:50.  
+Se instancia indicando la señal a controlar, el período y las unidades de tiempo.  
+
+Para que el reloj empiece a funcionar, debemos llamar a \texttt{start()} y pasar la coroutine al \texttt{scheduler} de cocotb mediante \texttt{cocotb.start\_soon(clock.start())}. De esta manera el clock es iniciado y no bloquea la ejecucion de la corutina principal que esta corriendo.
+
+En el siguiente test de un flip flop D vemos en uso a \texttt{cocotb.clock.Clock} y a \texttt{cocotb.triggers.RisingEdge(signal)}
+\begin{lstlisting}[language=Python, caption=flipflopd\_tb.py, frame=lines]
+import cocotb
+from cocotb.clock import Clock
+from cocotb.triggers import RisingEdge
+
+@cocotb.test()
+async def flipflopD_tb(dut):
+	"""Testbench for the FLIP FLOP D."""
+	
+	# Definimos el clock
+	clock = Clock(dut.clk, 10, units='ns')
+	
+	# Lo iniciamos para que corra en paralelo 
+	# con el resto del test
+	cocotb.start_soon(clock.start())
+	
+	dut.rst_in.value = 1
+	
+	# Se esperan dos ciclos para asegurar el cambio
+	await RisingEdge(dut.clk)
+	await RisingEdge(dut.clk) 
+	assert dut.q_out.value.integer == 0
+	
+	dut.rst_in.value = 0
+	dut.d_in.value = 0
+	await RisingEdge(dut.clk)
+	await RisingEdge(dut.clk)
+	assert dut.q_out.value.integer == 0
+	
+	dut.d_in.value = 1
+	await RisingEdge(dut.clk)
+	await RisingEdge(dut.clk)
+	assert dut.q_out.value.integer == 1
+	
+	dut.rst_in.value = 1
+	await RisingEdge(dut.clk)
+	await RisingEdge(dut.clk)
+	assert dut.q_out.value.integer == 0
 \end{lstlisting}
 
 
