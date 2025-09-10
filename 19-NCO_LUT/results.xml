@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1757478908" />
+    <testcase name="top_test" classname="top_tb" file="/storage/nahueldb_storage/Programacion/fpga-examples/19-NCO_LUT/top_tb.py" lineno="13" time="0.4435131549835205" sim_time_ns="10260.001" ratio_time="23133.476165732285" />
+  </testsuite>
+</testsuites>
