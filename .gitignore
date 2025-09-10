@@ -1,2 +1,13 @@
 venv/
 *.log
+top.*
+*.dvi
+*.aux
+*.log
+*.pdf
+*.toc
+*.out
+*.gz
+*.fls
+*.fdb_latexmk
+*.tdo
