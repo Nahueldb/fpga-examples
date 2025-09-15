@@ -7,78 +7,78 @@
 :vpi_module "v2005_math";
 :vpi_module "va_math";
 :vpi_module "v2009";
-S_0x55c354630840 .scope module, "top" "top" 2 5;
+S_0x561062733840 .scope module, "top" "top" 2 5;
  .timescale -9 -12;
     .port_info 0 /INPUT 1 "clk_in"
     .port_info 1 /INPUT 1 "rst_in"
     .port_info 2 /INPUT 4 "fcw_in"
     .port_info 3 /OUTPUT 12 "data_out"
-o0x7f74afa72168 .functor BUFZ 1, C4<z>; HiZ drive
-v0x55c354645a90_0 .net "clk_in", 0 0, o0x7f74afa72168;  0 drivers
-v0x55c354645b50_0 .net "data_out", 11 0, L_0x55c354646170;  1 drivers
-o0x7f74afa72198 .functor BUFZ 4, C4<zzzz>; HiZ drive
-v0x55c354645c20_0 .net "fcw_in", 3 0, o0x7f74afa72198;  0 drivers
-v0x55c354645d20_0 .net "nco_out", 9 0, v0x55c354645740_0;  1 drivers
-o0x7f74afa721f8 .functor BUFZ 1, C4<z>; HiZ drive
-v0x55c354645e10_0 .net "rst_in", 0 0, o0x7f74afa721f8;  0 drivers
-S_0x55c354609300 .scope module, "lut_inst" "lut" 2 28, 3 1 0, S_0x55c354630840;
+o0x7f88a4fae168 .functor BUFZ 1, C4<z>; HiZ drive
+v0x561062748a70_0 .net "clk_in", 0 0, o0x7f88a4fae168;  0 drivers
+v0x561062748b30_0 .net "data_out", 11 0, L_0x561062749150;  1 drivers
+o0x7f88a4fae198 .functor BUFZ 4, C4<zzzz>; HiZ drive
+v0x561062748c00_0 .net "fcw_in", 3 0, o0x7f88a4fae198;  0 drivers
+v0x561062748d00_0 .net "nco_out", 9 0, v0x561062748720_0;  1 drivers
+o0x7f88a4fae1f8 .functor BUFZ 1, C4<z>; HiZ drive
+v0x561062748df0_0 .net "rst_in", 0 0, o0x7f88a4fae1f8;  0 drivers
+S_0x56106270c300 .scope module, "lut_inst" "lut" 2 28, 3 1 0, S_0x561062733840;
  .timescale -9 -12;
     .port_info 0 /INPUT 10 "addr_in"
     .port_info 1 /OUTPUT 12 "data_out"
-P_0x55c3546094d0 .param/l "ADDR_BITS" 0 3 2, +C4<00000000000000000000000000001010>;
-L_0x55c354646170 .functor BUFZ 12, L_0x55c354645f60, C4<000000000000>, C4<000000000000>, C4<000000000000>;
-v0x55c354609570 .array "LUT", 1023 0, 11 0;
-v0x55c354609610_0 .net *"_s0", 11 0, L_0x55c354645f60;  1 drivers
-v0x55c354644eb0_0 .net *"_s2", 11 0, L_0x55c354646080;  1 drivers
-L_0x7f74afa29018 .functor BUFT 1, C4<00>, C4<0>, C4<0>, C4<0>;
-v0x55c354644f70_0 .net *"_s5", 1 0, L_0x7f74afa29018;  1 drivers
-v0x55c354645050_0 .net "addr_in", 9 0, v0x55c354645740_0;  alias, 1 drivers
-v0x55c354645180_0 .net "data_out", 11 0, L_0x55c354646170;  alias, 1 drivers
-L_0x55c354645f60 .array/port v0x55c354609570, L_0x55c354646080;
-L_0x55c354646080 .concat [ 10 2 0 0], v0x55c354645740_0, L_0x7f74afa29018;
-S_0x55c3546452c0 .scope module, "nco_inst" "nco" 2 18, 4 1 0, S_0x55c354630840;
+P_0x56106270c4d0 .param/l "ADDR_BITS" 0 3 2, +C4<00000000000000000000000000001010>;
+L_0x561062749150 .functor BUFZ 12, L_0x561062748f40, C4<000000000000>, C4<000000000000>, C4<000000000000>;
+v0x56106270c570 .array "LUT", 1023 0, 11 0;
+v0x56106270c610_0 .net *"_s0", 11 0, L_0x561062748f40;  1 drivers
+v0x561062747e90_0 .net *"_s2", 11 0, L_0x561062749060;  1 drivers
+L_0x7f88a4f65018 .functor BUFT 1, C4<00>, C4<0>, C4<0>, C4<0>;
+v0x561062747f50_0 .net *"_s5", 1 0, L_0x7f88a4f65018;  1 drivers
+v0x561062748030_0 .net "addr_in", 9 0, v0x561062748720_0;  alias, 1 drivers
+v0x561062748160_0 .net "data_out", 11 0, L_0x561062749150;  alias, 1 drivers
+L_0x561062748f40 .array/port v0x56106270c570, L_0x561062749060;
+L_0x561062749060 .concat [ 10 2 0 0], v0x561062748720_0, L_0x7f88a4f65018;
+S_0x5610627482a0 .scope module, "nco_inst" "nco" 2 18, 4 1 0, S_0x561062733840;
  .timescale -9 -12;
     .port_info 0 /INPUT 1 "rst_in"
     .port_info 1 /INPUT 1 "clk_in"
     .port_info 2 /INPUT 4 "fcw_in"
     .port_info 3 /OUTPUT 10 "nco_out"
-P_0x55c35460a890 .param/l "NCO_BITS" 0 4 2, +C4<00000000000000000000000000001010>;
-P_0x55c35460a8d0 .param/l "NCO_FREQ_BITS" 0 4 3, +C4<00000000000000000000000000000100>;
-v0x55c354645580_0 .net "clk_in", 0 0, o0x7f74afa72168;  alias, 0 drivers
-v0x55c354645660_0 .net "fcw_in", 3 0, o0x7f74afa72198;  alias, 0 drivers
-v0x55c354645740_0 .var "nco_cnt", 9 0;
-v0x55c354645830_0 .net "nco_out", 9 0, v0x55c354645740_0;  alias, 1 drivers
-v0x55c354645920_0 .net "rst_in", 0 0, o0x7f74afa721f8;  alias, 0 drivers
-E_0x55c354609b40 .event posedge, v0x55c354645920_0, v0x55c354645580_0;
-S_0x55c3546309c0 .scope module, "cocotb_iverilog_dump" "cocotb_iverilog_dump" 5 1;
+P_0x56106270d890 .param/l "NCO_BITS" 0 4 2, +C4<00000000000000000000000000001010>;
+P_0x56106270d8d0 .param/l "NCO_FREQ_BITS" 0 4 3, +C4<00000000000000000000000000000100>;
+v0x561062748560_0 .net "clk_in", 0 0, o0x7f88a4fae168;  alias, 0 drivers
+v0x561062748640_0 .net "fcw_in", 3 0, o0x7f88a4fae198;  alias, 0 drivers
+v0x561062748720_0 .var "nco_cnt", 9 0;
+v0x561062748810_0 .net "nco_out", 9 0, v0x561062748720_0;  alias, 1 drivers
+v0x561062748900_0 .net "rst_in", 0 0, o0x7f88a4fae1f8;  alias, 0 drivers
+E_0x56106270cb40 .event posedge, v0x561062748900_0, v0x561062748560_0;
+S_0x5610627339c0 .scope module, "cocotb_iverilog_dump" "cocotb_iverilog_dump" 5 1;
  .timescale -9 -12;
-    .scope S_0x55c3546452c0;
+    .scope S_0x5610627482a0;
 T_0 ;
-    %wait E_0x55c354609b40;
-    %load/vec4 v0x55c354645920_0;
+    %wait E_0x56106270cb40;
+    %load/vec4 v0x561062748900_0;
     %flag_set/vec4 8;
     %jmp/0xz  T_0.0, 8;
     %pushi/vec4 0, 0, 10;
-    %assign/vec4 v0x55c354645740_0, 0;
+    %assign/vec4 v0x561062748720_0, 0;
     %jmp T_0.1;
 T_0.0 ;
-    %load/vec4 v0x55c354645740_0;
-    %load/vec4 v0x55c354645660_0;
+    %load/vec4 v0x561062748720_0;
+    %load/vec4 v0x561062748640_0;
     %pad/u 10;
     %add;
-    %assign/vec4 v0x55c354645740_0, 0;
+    %assign/vec4 v0x561062748720_0, 0;
 T_0.1 ;
     %jmp T_0;
     .thread T_0;
-    .scope S_0x55c354609300;
+    .scope S_0x56106270c300;
 T_1 ;
-    %vpi_call/w 3 10 "$readmemh", "sine_table.hex", v0x55c354609570 {0 0 0};
+    %vpi_call/w 3 10 "$readmemh", "sine_table.hex", v0x56106270c570 {0 0 0};
     %end;
     .thread T_1;
-    .scope S_0x55c3546309c0;
+    .scope S_0x5610627339c0;
 T_2 ;
     %vpi_call/w 5 3 "$dumpfile", "sim_build/top.fst" {0 0 0};
-    %vpi_call/w 5 4 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x55c354630840 {0 0 0};
+    %vpi_call/w 5 4 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x561062733840 {0 0 0};
     %end;
     .thread T_2;
 # The file index is used to find the file name in the following table.
