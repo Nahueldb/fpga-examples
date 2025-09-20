@@ -1,13 +1,14 @@
-module PWM #(
-    parameter PWM_BITS = 4,
+module pwm #(
+    parameter PWM_BITS = 4
 )(
     input clk,
     input [PWM_BITS-1:0] PWM_in,
     output PWM_out
 );
 
-reg [PWM_BITS-1:0] cnt;
-always @(posedge clk) cnt <= cnt + 1'b1;  // free-running counter
+reg [PWM_BITS:0] PWM_acc = 0;
 
-assign PWM_out = (PWM_in > cnt);  // comparator
+always @(posedge clk) PWM_acc <= PWM_acc + PWM_in;
+
+assign PWM_out = PWM_acc[PWM_BITS];
 endmodule
