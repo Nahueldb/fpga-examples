@@ -1,6 +1,5 @@
 venv/
 *.log
-top.*
 *.dvi
 *.aux
 *.log
