@@ -1,8 +1,6 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1758404294" />
-    <testcase name="top_test" classname="top_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/PWM/top_tb.py" lineno="13" time="0.0021758079528808594" sim_time_ns="30.001" ratio_time="13788.441190444883">
-      <failure message="Test failed with RANDOM_SEED=1758404294" />
-    </testcase>
+    <property name="random_seed" value="1758742318" />
+    <testcase name="top_test" classname="top_tb" file="/storage/nahueldb_storage/Programacion/fpga-examples/PWM/top_tb.py" lineno="16" time="2.8395509719848633" sim_time_ns="2020000.001" ratio_time="711380.0811922061" />
   </testsuite>
 </testsuites>

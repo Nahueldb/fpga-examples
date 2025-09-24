@@ -1,14 +1,20 @@
 module pwm #(
-    parameter PWM_BITS = 4
+    parameter PWM_BITS = 12
 )(
-    input clk,
-    input [PWM_BITS-1:0] PWM_in,
-    output PWM_out
+    input wire rst_in,
+    input wire clk_pwm,
+    input wire [PWM_BITS-1:0] pwm_in,
+    output wire pwm_out
 );
 
-reg [PWM_BITS:0] PWM_acc = 0;
+reg [PWM_BITS:0] pwm_acc = {PWM_BITS+1{1'b0}};
 
-always @(posedge clk) PWM_acc <= PWM_acc + PWM_in;
+always @(posedge clk_pwm) begin
+    if (rst_in)
+        pwm_acc <= {PWM_BITS+1{1'b0}};
+    else
+        pwm_acc <= pwm_acc + pwm_in;
+end
 
-assign PWM_out = PWM_acc[PWM_BITS];
+assign pwm_out = pwm_acc[PWM_BITS];
 endmodule

@@ -4,6 +4,7 @@
 
 module top (
     input wire clk_in,
+    input wire clk_pwm,
     input wire rst_in,
     input wire [3:0] fcw_in, // Frequency control word input
     output wire pwm_out
@@ -36,9 +37,10 @@ module top (
     pwm #(
         .PWM_BITS(12)
     ) pwm_inst (
-        .clk(clk_in),
-        .PWM_in(data_out), // Usamos los 12 bits para el PWM
-        .PWM_out(pwm_out)
+        .rst_in(rst_in),
+        .clk_pwm(clk_pwm),
+        .pwm_in(data_out), // Usamos los 12 bits para el PWM
+        .pwm_out(pwm_out)
     );
 
 endmodule
