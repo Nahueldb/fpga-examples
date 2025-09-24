@@ -11,14 +11,14 @@ DATA_OUT_BITS = 12
 FCW_VALUE = 1  # Valor fijo para fcw_in
 RC = 2000e-6             # constante de tiempo del filtro
 T = 1000            # periodo del clk_in
-T_PWM = 10000   # periodo del PWM
+T_PWM = 1000   # periodo del PWM
 
 @cocotb.test()
 async def top_test(dut):
     # Inicializar el reloj
     # clk_in = 1 MHz  (periodo 1000 ns)
     cocotb.start_soon(Clock(dut.clk_in, T, units="ns").start())
-    # clk_pwm = 100 kHz (periodo 10000 ns)
+    # clk_pwm = 1 MHz  (periodo 1000 ns)
     cocotb.start_soon(Clock(dut.clk_pwm, T_PWM, units="ns").start())
 
     # Resetear el DUT
@@ -45,7 +45,7 @@ async def top_test(dut):
     tasks = []
     for i in range(0, max_count, FCW_VALUE):
         await RisingEdge(dut.clk_in)
-        task = cocotb.start_soon(sample_pwm(dut, 100))
+        task = cocotb.start_soon(sample_pwm(dut, 4096))
         tasks.append(task)
         assert dut.data_out.value.integer == lut_values[i]
         nco_samples.append(dut.data_out.value.integer)

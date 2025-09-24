@@ -7,14 +7,15 @@ module pwm #(
     output wire pwm_out
 );
 
-reg [PWM_BITS:0] pwm_acc = {PWM_BITS+1{1'b0}};
+// reg [PWM_BITS:0] pwm_acc = {PWM_BITS+1{1'b0}};
+reg [PWM_BITS-1:0] cnt;
 
 always @(posedge clk_pwm) begin
     if (rst_in)
-        pwm_acc <= {PWM_BITS+1{1'b0}};
-    else
-        pwm_acc <= pwm_acc + pwm_in;
+        cnt <= 0;
+    else if (cnt < pwm_in)
+        cnt <= cnt + 1;
 end
 
-assign pwm_out = pwm_acc[PWM_BITS];
+assign pwm_out = (pwm_in > cnt) ? 1'b0 : 1'b1;
 endmodule
