@@ -11,9 +11,8 @@ module top (
 );
     // Parámetros
     parameter NCO_BITS = 10;
-    parameter NCO_FREQ_BITS = 4;
     parameter ADDR_BITS = 10;
-    parameter DATA_OUT_BITS = 12;
+    parameter DATA_OUT_BITS = 16;
 
     // Salidas intermedias
     wire [ADDR_BITS-1:0] addr;
@@ -22,30 +21,27 @@ module top (
 
     // Instancia del NCO para la frecuencia
     nco #(
-        .NCO_BITS(NCO_BITS),
-        .NCO_FREQ_BITS(NCO_FREQ_BITS)
+        .NCO_BITS(NCO_BITS)
     ) nco_freq (
         .rst_in(rst_in),
         .clk_in(clk_in),
-        .fcw_in(fcw_in),
         .nco_out(nco_out)
     );
     assign mem_clk_out = nco_out[NCO_BITS-1]; // Salida del bit más significativo del NCO
 
     // Instancia del NCO para la dirección
     nco #(
-        .NCO_BITS(NCO_BITS),
-        .NCO_FREQ_BITS(NCO_FREQ_BITS)
+        .NCO_BITS(NCO_BITS)
     ) nco_addr (
         .rst_in(rst_in),
         .clk_in(nco_out[NCO_BITS-1]), // Usamos el bit más significativo del primer NCO como reloj
-        .fcw_in(fcw_in),
         .nco_out(addr)
     );
 
     // Instancia de la LUT
     lut #(
-        .ADDR_BITS(ADDR_BITS)
+        .ADDR_BITS(ADDR_BITS),
+        .DATA_OUT_BITS(DATA_OUT_BITS)
     ) lut_inst (
         .addr_in(addr[ADDR_BITS-1:0]), // Usamos los bits menos significativos como dirección
         .data_out(data_out),

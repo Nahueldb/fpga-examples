@@ -9,13 +9,13 @@ NCO_BITS = 10
 NCO_FREQ_BITS = 4
 DATA_OUT_BITS = 12
 FCW_VALUE = 1  # Valor fijo para fcw_in
-T = 1000            # periodo del clk_in
+T = 83.33            # periodo del clk_in
 T_PWM = 1000   # periodo del PWM
 
 @cocotb.test()
 async def top_test(dut):
     # Inicializar el reloj
-    # clk_in = 1 MHz  (periodo 1000 ns)
+    # clk_in = 12 MHz  (periodo 83.33 ns)
     cocotb.start_soon(Clock(dut.clk_in, T, units="ns").start())
     # # clk_pwm = 1 MHz  (periodo 1000 ns)
     # cocotb.start_soon(Clock(dut.clk_pwm, T_PWM, units="ns").start())
