@@ -13,9 +13,9 @@ reg [PWM_BITS-1:0] cnt;
 always @(posedge clk_pwm) begin
     if (rst_in)
         cnt <= 0;
-    else if (cnt < pwm_in)
+    else
         cnt <= cnt + 1;
 end
 
-assign pwm_out = (pwm_in > cnt) ? 1'b0 : 1'b1;
+assign pwm_out = (cnt < pwm_in) ? 1'b1 : 1'b0;
 endmodule
