@@ -10,9 +10,9 @@ module top (
     output wire mem_clk_out
 );
     // Parámetros
-    parameter NCO_FREQ_BITS = 12;
+    parameter NCO_FREQ_BITS = 8;
     parameter ADDR_BITS = 10;
-    parameter DATA_OUT_BITS = 16;
+    parameter DATA_OUT_BITS = 12;
 
     // Salidas intermedias
     wire [NCO_FREQ_BITS-1:0] nco_out;
