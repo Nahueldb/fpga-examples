@@ -1,17 +1,20 @@
 module spi_master #(
-    parameter DATA_WIDTH = 8
+    parameter DATA_WIDTH = 12
 ) (
     input wire clk,
-    output wire mosi,
+    // output wire mosi,
     input wire miso,
+    input wire ssel_in,
     output wire sck,
-    output wire ssel
+    output wire ssel,
+    output reg [DATA_WIDTH-1:0]d_reg_master
 );
-    reg [DATA_WIDTH-1:0]d_reg;
     assign sck = clk;
-    assign ssel = 1'b0; // Active low, always selected for simplicity
+    assign ssel = ssel_in;
 
     always @(posedge sck) begin
-        d_reg >= {d_reg[DATA_WIDTH-2:0], miso};
+        if (ssel == 0) begin
+            d_reg_master <= {d_reg_master[DATA_WIDTH-2:0], miso};
+        end
     end
 endmodule
