@@ -1,6 +1,6 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1761162886" />
-    <testcase name="spi_test" classname="spi_tb" file="/storage/nahueldb_storage/Programacion/fpga-examples/SPI/spi_tb.py" lineno="11" time="0.004615306854248047" sim_time_ns="1083.291" ratio_time="234717.00456989356" />
+    <property name="random_seed" value="1761436932" />
+    <testcase name="spi_test" classname="spi_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/SPI/spi_tb.py" lineno="11" time="0.002438783645629883" sim_time_ns="1166.621" ratio_time="478361.82684367977" />
   </testsuite>
 </testsuites>
