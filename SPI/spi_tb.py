@@ -6,7 +6,7 @@ logger = cocotb.logging.getLogger("cocotb")
 T = 83.33            # periodo del clk
 N_BITS = 12
 DATA_BITS = 0b100000101010
-
+SINE_VALUES = 1024
 
 @cocotb.test()
 async def spi_test(dut):
@@ -22,9 +22,14 @@ async def spi_test(dut):
     with open("sine_table.hex", "r") as f:
         lut_values = [int(line.strip(), 16) for line in f.readlines()]
 
-    for i in range(N_BITS):
+    for j in range(SINE_VALUES):
+        logger.info(f"Starting SPI transfer {j}, expecting value {lut_values[j]:b}")
+        for i in range(N_BITS):
+            await RisingEdge(dut.clk)
+            assert dut.miso.value == (lut_values[j] >> (N_BITS - 1 - i)) & 1, f"Expected bit {(lut_values[j] >> (N_BITS - 1 - i)) & 1}, got {dut.miso.value}, at j={j}, i={i}"
+            logger.info(f"Expected bit {(lut_values[j] >> (N_BITS - 1 - i)) & 1}, got {dut.miso.value}, at j={j}, i={i}")
         await RisingEdge(dut.clk)
-        assert dut.miso.value == (DATA_BITS >> (N_BITS - 1 - i)) & 1
+        assert dut.d_reg_master.value == lut_values[j], f"Expected {lut_values[j]}, got {dut.d_reg_master.value}, at j={j}"
+        logger.info(f"SPI transfer {j} successful: received {dut.d_reg_master.value}, expected {lut_values[j]:b}")
 
     await RisingEdge(dut.clk)
-    assert dut.d_reg_master.value == DATA_BITS

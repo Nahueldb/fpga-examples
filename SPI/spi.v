@@ -6,12 +6,12 @@ module spi (
     input wire clk,
     input wire rst,
     // output wire mosi,
-    output wire sck,
-    output wire ssel,
     input wire ssel_in,
-    output wire [11:0] d_reg_master,
-    input wire [11:0] tx_data_slave
+    output wire [11:0] d_reg_master
+    // input wire [11:0] tx_data_slave
 );
+    wire sck;
+    wire ssel;
     parameter DATA_WIDTH = 12;
     wire miso;
 
@@ -33,8 +33,8 @@ module spi (
         // .mosi(mosi),
         .miso_slave(miso),
         .sck(sck),
-        .ssel_slave(ssel),
-        .tx_data(tx_data_slave)
+        .ssel_slave(ssel)
+        // .tx_data(tx_data_slave)
     );
 
 endmodule
