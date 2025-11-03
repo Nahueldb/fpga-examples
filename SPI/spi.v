@@ -7,8 +7,8 @@ module spi (
     input wire rst,
     // output wire mosi,
     input wire ssel_in,
-    output wire [11:0] d_reg_master
-    // input wire [11:0] tx_data_slave
+    output wire [11:0] d_reg_master,
+    output wire [11:0] test_wire
 );
     wire sck;
     wire ssel;
@@ -33,8 +33,13 @@ module spi (
         // .mosi(mosi),
         .miso_slave(miso),
         .sck(sck),
-        .ssel_slave(ssel)
-        // .tx_data(tx_data_slave)
+        .ssel_slave(ssel),
+        .test_wire(test_wire)
     );
+
+    initial begin
+        $dumpfile("spi_wave.vcd");
+        $dumpvars(0, spi);
+    end
 
 endmodule

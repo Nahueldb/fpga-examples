@@ -27,9 +27,14 @@ async def spi_test(dut):
         for i in range(N_BITS):
             await RisingEdge(dut.clk)
             assert dut.miso.value == (lut_values[j] >> (N_BITS - 1 - i)) & 1, f"Expected bit {(lut_values[j] >> (N_BITS - 1 - i)) & 1}, got {dut.miso.value}, at j={j}, i={i}"
-            logger.info(f"Expected bit {(lut_values[j] >> (N_BITS - 1 - i)) & 1}, got {dut.miso.value}, at j={j}, i={i}")
+            logger.info(f"Expected bit {(lut_values[j] >> (N_BITS - 1 - i)) & 1}, got {dut.miso.value}, at j={j}, i={i}, test_wire={dut.test_wire.value}")
         await RisingEdge(dut.clk)
         assert dut.d_reg_master.value == lut_values[j], f"Expected {lut_values[j]}, got {dut.d_reg_master.value}, at j={j}"
         logger.info(f"SPI transfer {j} successful: received {dut.d_reg_master.value}, expected {lut_values[j]:b}")
+        dut.ssel_in.value = 1
+        await RisingEdge(dut.clk)
+
+        dut.ssel_in.value = 0
+        await RisingEdge(dut.clk)
 
     await RisingEdge(dut.clk)
