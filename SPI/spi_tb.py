@@ -23,14 +23,14 @@ async def spi_test(dut):
         lut_values = [int(line.strip(), 16) for line in f.readlines()]
 
     for j in range(SINE_VALUES):
-        logger.info(f"Starting SPI transfer {j}, expecting value {lut_values[j]:b}")
+        # logger.info(f"Starting SPI transfer {j}, expecting value {lut_values[j]:b}")
         for i in range(N_BITS):
             await RisingEdge(dut.clk)
             assert dut.miso.value == (lut_values[j] >> (N_BITS - 1 - i)) & 1, f"Expected bit {(lut_values[j] >> (N_BITS - 1 - i)) & 1}, got {dut.miso.value}, at j={j}, i={i}"
-            logger.info(f"Expected bit {(lut_values[j] >> (N_BITS - 1 - i)) & 1}, got {dut.miso.value}, at j={j}, i={i}, test_wire={dut.test_wire.value}")
+            # logger.info(f"Expected bit {(lut_values[j] >> (N_BITS - 1 - i)) & 1}, got {dut.miso.value}, at j={j}, i={i}, test_wire={dut.test_wire.value}")
         await RisingEdge(dut.clk)
         assert dut.d_reg_master.value == lut_values[j], f"Expected {lut_values[j]}, got {dut.d_reg_master.value}, at j={j}"
-        logger.info(f"SPI transfer {j} successful: received {dut.d_reg_master.value}, expected {lut_values[j]:b}")
+        # logger.info(f"SPI transfer {j} successful: received {dut.d_reg_master.value}, expected {lut_values[j]:b}")
         dut.ssel_in.value = 1
         await RisingEdge(dut.clk)
 

@@ -4,8 +4,8 @@ module spi_slave #(
     // input wire mosi,
     output reg miso_slave,
     input wire sck,
-    input wire ssel_slave,
-    output reg [DATA_WIDTH-1:0] test_wire
+    input wire ssel_slave
+    // output reg [DATA_WIDTH-1:0] test_wire
 );
     parameter COUNT_MAX = 12;
     reg [DATA_WIDTH-1:0] d_reg;
@@ -35,7 +35,7 @@ module spi_slave #(
             else begin
                 counter_clock <= counter_clock + 1;
                 miso_slave <= d_reg[DATA_WIDTH-1];
-                test_wire <= d_reg; // For testing purposes
+                // test_wire <= d_reg; // For testing purposes
                 d_reg <= {d_reg[DATA_WIDTH-2:0], 1'b0};
             end
         end
