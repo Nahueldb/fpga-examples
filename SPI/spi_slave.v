@@ -26,7 +26,7 @@ module spi_slave #(
             flag_address <= 1'b1;
         end
         else begin
-            if (counter_clock == COUNT_MAX - 1 && flag_address) begin
+            if (counter_clock > COUNT_MAX - 1 && flag_address) begin
                 flag_address <= 1'b0;
                 counter_address <= counter_address + 1;
                 // d_reg <= LUT[counter_address];
