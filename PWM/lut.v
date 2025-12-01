@@ -6,10 +6,10 @@ module lut #(
     output reg [DATA_OUT_BITS-1:0] data_out,
     input wire clk_in // Added clock input
 );
-    reg [DATA_OUT_BITS-1:0] LUT [0:262094]; // 1024 valores de 12 bits
+    reg [DATA_OUT_BITS-1:0] LUT [0:88199]; // 88200 valores de 12 bits
 
     initial begin
-        $readmemh("audio_full.hex", LUT);
+        $readmemh("audio_table.hex", LUT);
     end
 
     // assign data_out = LUT[addr_in];
