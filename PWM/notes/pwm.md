@@ -20,7 +20,8 @@ Cambiando la resolucion del dac de 12 a 16 bits y un RC = 2000E-6, se obtiene la
 ![pwm_signal](pwm_rc_filter.png)
 
 ---
-Cambiando 
+Cambiando
+
 - parameter NCO_FREQ_BITS = 12;
 - RC = 1000E-6
 
@@ -28,9 +29,9 @@ Se obtiene la siguiente señal:
 
 ![pwm_signal](pwm_rc_filter5.png)
 
-
 ---
-Cambiando 
+Cambiando
+
 - parameter NCO_FREQ_BITS = 12;
 - RC = 2000E-6
 
@@ -39,7 +40,8 @@ Se obtiene la siguiente señal:
 ![pwm_signal](pwm_rc_filter2.png)
 
 ---
-Cambiando 
+Cambiando
+
 - parameter NCO_FREQ_BITS = 13;
 - RC = 1000E-6
 
@@ -48,10 +50,21 @@ Se obtiene la siguiente señal:
 ![pwm_signal](pwm_rc_filter3.png)
 
 ---
-Cambiando 
+Cambiando
+
 - parameter NCO_FREQ_BITS = 13;
 - RC = 2000E-6
 
 Se obtiene la siguiente señal:
 
 ![pwm_signal](pwm_rc_filter4.png)
+
+---
+Cambiando la resolucion del dac de 16 a 12 bits
+
+- parameter NCO_FREQ_BITS = 8;
+- RC = 2000E-6
+
+Se obtiene la siguiente señal:
+
+![pwm_signal](pwm_rc_filter6.png)

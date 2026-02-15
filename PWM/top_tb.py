@@ -30,23 +30,24 @@ async def top_test(dut):
     assert dut.rst_in.value == 0, f"Expected 0, got {dut.rst_in.value}"
     # assert dut.pwm_out.value == 0, f"Expected 0, got {dut.pwm_out.value}"
 
-    max_count = (2**NCO_BITS)
+    # max_count = (2**NCO_BITS)
 
     dut.rst_in.value = 1
     await RisingEdge(dut.clk_in)
     dut.rst_in.value = 0
 
-    with open("sine_table.hex", "r") as f:
+    with open("audio_table.hex", "r") as f:
         lut_values = [int(line.strip(), 16) for line in f.readlines()]
-
+    max_count = len(lut_values)
+    logger.info(f"Max count: {max_count}")
     samples = []
     nco_samples = []
     tasks = []
 
-    for i in range(0, max_count, FCW_VALUE):
+    for i in range(0, max_count - 1, FCW_VALUE):
         await RisingEdge(dut.mem_clk_out)
 
-        task = cocotb.start_soon(sample_pwm(dut))
+        task = cocotb.start_soon(sample_pwm(dut, i))
         tasks.append(task)
         assert dut.data_out.value.integer == lut_values[i], f"At i={i}, expected {lut_values[i]}, got {dut.data_out.value.integer}"
         nco_samples.append(dut.data_out.value.integer)
@@ -56,19 +57,23 @@ async def top_test(dut):
 
     await Combine(*tasks)
     for task in tasks:
-        samples.extend(task.result())
+        try:
+            samples.extend(task.result())
+        except Exception as e:
+            logger.error(f"Error in task: {e}")
 
     # samples to samples.txt
     with open("samples.txt", "w") as f:
         f.write(samples.__str__())
 
 
-async def sample_pwm(dut):
+async def sample_pwm(dut, i):
     local_samples = []
+    logger.info(f"Sampling PWM at i={i}")
     for _ in range(2*DATA_OUT_BITS):
         await RisingEdge(dut.clk_in)
         local_samples.append(dut.pwm_out.value.integer)
-
+    logger.info(f"Completed sampling PWM at i={i}, N samples: {len(local_samples)}")
     return local_samples
 
 

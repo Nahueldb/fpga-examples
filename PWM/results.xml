@@ -1,6 +1,6 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1759505869" />
-    <testcase name="top_test" classname="top_tb" file="/storage/nahueldb_storage/Programacion/fpga-examples/PWM/top_tb.py" lineno="15" time="538.6531422138214" sim_time_ns="349342859.061" ratio_time="648548.8186799184" />
+    <property name="random_seed" value="1764552107" />
+    <testcase name="top_test" classname="top_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/PWM/top_tb.py" lineno="15" time="1570.696277141571" sim_time_ns="1881494903.861" ratio_time="1197873.1542453486" />
   </testsuite>
 </testsuites>

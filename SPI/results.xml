@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1763587307" />
+    <testcase name="spi_test" classname="spi_tb" file="/storage/nahueldb_storage/Trabajo/UTN/ASE/fpga-examples/SPI/spi_tb.py" lineno="11" time="2.250216007232666" sim_time_ns="1280115.461" ratio_time="568885.5900435515" />
+  </testsuite>
+</testsuites>

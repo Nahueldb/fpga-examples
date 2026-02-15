@@ -10,9 +10,9 @@ module top (
     output wire mem_clk_out
 );
     // Parámetros
-    parameter NCO_FREQ_BITS = 12;
-    parameter ADDR_BITS = 10;
-    parameter DATA_OUT_BITS = 16;
+    parameter NCO_FREQ_BITS = 8;
+    parameter ADDR_BITS = 18;
+    parameter DATA_OUT_BITS = 12;
 
     // Salidas intermedias
     wire [NCO_FREQ_BITS-1:0] nco_out;
@@ -57,5 +57,10 @@ module top (
         .pwm_in(data_out), // Usamos los 12 bits para el PWM
         .pwm_out(pwm_out)
     );
+
+    initial begin
+        $dumpfile("top_wave.vcd");
+        $dumpvars(0, top);
+    end
 
 endmodule
