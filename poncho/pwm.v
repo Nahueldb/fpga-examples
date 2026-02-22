@@ -4,7 +4,8 @@ module pwm #(
     input wire rst_in,
     input wire clk_pwm,
     input wire [PWM_BITS-1:0] pwm_in,
-    output wire pwm_out
+    output wire pwm_out,
+    output wire pwm_period_done
 );
 
 // reg [PWM_BITS:0] pwm_acc = {PWM_BITS+1{1'b0}};
@@ -18,4 +19,6 @@ always @(posedge clk_pwm) begin
 end
 
 assign pwm_out = (cnt < pwm_in) ? 1'b1 : 1'b0;
+assign pwm_period_done = (cnt == {PWM_BITS{1'b1}});
+
 endmodule
