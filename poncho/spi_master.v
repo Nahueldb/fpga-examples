@@ -10,9 +10,10 @@ module spi_master #(
     output wire sck,
     output reg ssel,
     output reg [DATA_WIDTH-1:0]d_reg_master,
-    output reg sample_valid
+    output reg sample_valid,
+    output reg [$clog2(DATA_WIDTH)-1:0] bit_cnt
 );
-    reg [$clog2(DATA_WIDTH)-1:0] bit_cnt;
+    // reg [$clog2(DATA_WIDTH)-1:0] bit_cnt;
     assign sck = clk;
 
     always @(posedge sck) begin

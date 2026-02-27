@@ -6,8 +6,11 @@ module top (
     input wire clk_in,
     input wire rst_in,
     output wire [11:0] d_reg_master,
-    output wire pwm_out
-);
+    input wire miso,
+    output wire pwm_out,
+    output wire ssel_out,
+    output wire [$clog2(DATA_OUT_BITS)-1:0] bit_cnt
+    );
     // Parámetros
     parameter DATA_OUT_BITS = 12;
     parameter PWM_BITS = 12;
@@ -15,8 +18,6 @@ module top (
     // Salidas intermedias
     wire [DATA_OUT_BITS-1:0] data_out;
     wire sck;
-    wire ssel;
-    wire miso;
     wire sample_valid;
     wire pwm_period_done;
     wire fifo_full;
@@ -31,7 +32,7 @@ module top (
             sample_cnt  <= 0;
             sample_tick <= 0;
         end else begin
-            if (sample_cnt == 249) begin
+            if (sample_cnt == 499) begin
                 sample_cnt  <= 0;
                 sample_tick <= 1;   // pulso de 1 ciclo
             end else begin
@@ -52,9 +53,10 @@ module top (
         .fifo_full(fifo_full),
         .sample_tick(sample_tick),
         .sck(sck),
-        .ssel(ssel),
+        .ssel(ssel_out),
         .d_reg_master(d_reg_master),
-        .sample_valid(sample_valid)
+        .sample_valid(sample_valid),
+        .bit_cnt(bit_cnt)
     );
 
     // Instancia de la FIFO
@@ -84,6 +86,11 @@ module top (
     );
 
     assign fifo_rd_en = pwm_period_done && !fifo_empty;
+
+    initial begin
+        $dumpfile("top_wave.vcd");
+        $dumpvars(0, top);
+    end
 
     initial begin
         $dumpfile("top_wave.vcd");

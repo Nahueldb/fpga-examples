@@ -13,12 +13,12 @@ reg [PWM_BITS-1:0] cnt;
 
 always @(posedge clk_pwm) begin
     if (rst_in)
-        cnt <= 0;
+        cnt <= {PWM_BITS{1'b0}};
     else
         cnt <= cnt + 1;
 end
 
 assign pwm_out = (cnt < pwm_in) ? 1'b1 : 1'b0;
-assign pwm_period_done = (cnt == {PWM_BITS{1'b1}});
+assign pwm_period_done = (cnt == {PWM_BITS{1'b0}});
 
 endmodule
