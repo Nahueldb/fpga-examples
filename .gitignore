@@ -10,3 +10,19 @@ venv/
 *.fls
 *.fdb_latexmk
 *.tdo
+
+# Python
+__pycache__/
+*.pyc
+
+# Cocotb / simulación
+sim_build/
+results.xml
+*.vvp
+*.fst
+*.vcd
+cmds.f
+cocotb_iverilog_dump.v
+
+# Editor
+.vscode/
