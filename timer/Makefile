@@ -6,4 +6,5 @@ WAVES = 1
 
 SIM = icarus
 
+COMPILE_ARGS += -Ptimer.CLK_FREQ=10
 include $(shell cocotb-config --makefiles)/Makefile.sim

@@ -1,4 +1,7 @@
-module timer (
+module timer #(
+    parameter CLK_FREQ = 12_000_000,
+    parameter TIMER_SET = 180
+) (
     input wire clk,
     input wire signal_in,
     output reg led_red = 0,
@@ -6,8 +9,7 @@ module timer (
     output reg led_yellow = 0,
     output reg signal_out = 0
 );
-    parameter COUNT_MAX = 180;
-
+    parameter COUNT_MAX = TIMER_SET * CLK_FREQ;
     reg [22:0] counter = 0;
 
     typedef enum reg [1:0] {
