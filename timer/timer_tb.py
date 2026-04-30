@@ -11,6 +11,7 @@ async def test_timer(dut):
     # Initialize the clock
     clock = Clock(dut.clk, PERIOD, units='ms')
     cocotb.start_soon(clock.start())
+    await RisingEdge(dut.clk)  # Wait for the first clock edge
 
     dut.signal_in.value = 1
     await RisingEdge(dut.clk)  # Wait for the signal to be registered

@@ -9,17 +9,15 @@ module timer #(
     output reg led_yellow = 0,
     output reg signal_out = 0
 );
-    parameter COUNT_MAX = TIMER_SET * CLK_FREQ;
-    reg [22:0] counter = 0;
+    localparam COUNT_MAX = TIMER_SET * CLK_FREQ;
+    reg [31:0] counter = 0;
 
-    typedef enum reg [1:0] {
-        IDLE,
-        GREEN,
-        YELLOW,
-        RED
-    } state_t;
+    localparam [1:0] IDLE   = 2'b00;
+    localparam [1:0] GREEN  = 2'b01;
+    localparam [1:0] YELLOW = 2'b10;
+    localparam [1:0] RED    = 2'b11;
 
-    state_t state = IDLE;
+    reg [1:0] state = IDLE;
 
 
     always @(posedge clk) begin

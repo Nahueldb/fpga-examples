@@ -26,3 +26,5 @@ cocotb_iverilog_dump.v
 
 # Editor
 .vscode/
+
+.codex
